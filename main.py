@@ -1,7 +1,10 @@
 import tkinter as tk
 
-from widgets.input_text import InputText
-from widgets.register_button import RegisterButton
+from actions.register_button_action import ButtonAction
+from tasks.registers import TaskRegisters
+from widgets.input_text_widget import InputTextWidget
+from widgets.register_button_widget import RegisterButtonWidget
+from widgets.tasks_list_widget import TasksListWidget
 
 WIDTH, HEIGHT = 600, 600
 
@@ -13,8 +16,13 @@ root.minsize(width=WIDTH, height=HEIGHT)
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack(fill="both", expand=True)
 
-input_label = InputText(frame).draw()
-register_button_wg = RegisterButton(frame, input_label).draw()
+input_label = InputTextWidget(frame).draw()
+task_register = TaskRegisters()
+tasks_list = TasksListWidget(frame)
+
+button_action = ButtonAction(task_register, tasks_list)
+
+register_button_wg = RegisterButtonWidget(frame, input_label, button_action).draw()
 
 
 root.mainloop()

@@ -1,6 +1,6 @@
 import tkinter as tk
 
-class InputText:
+class InputTextWidget:
     def __init__(self, root) -> None:
         self.root = root
 

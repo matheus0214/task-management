@@ -1,16 +1,14 @@
 import tkinter as tk
 
-from actions.register_button import ButtonAction
-
-class RegisterButton:
-    def __init__(self, root, input_label) -> None:
+class RegisterButtonWidget:
+    def __init__(self, root, input_label, button_action) -> None:
         self.root = root
         self.input_label = input_label
+        self.button_action = button_action
 
     def draw(self):
-        button_action = ButtonAction()
         register_button = tk.Button(self.root, text="Register", command=lambda :
-                                   button_action.register(self.input_label))
+                                   self.button_action.register(self.input_label))
         register_button.pack(pady=10)
 
         return register_button
