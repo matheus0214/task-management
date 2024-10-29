@@ -1,9 +1,42 @@
+from pathlib import Path
+import json
+
+
 class TaskRegisters:
+    FILE_PATH = "./data/tasks.json"
+
     def __init__(self) -> None:
         self.tasks = []
 
     def add(self, task):
-        self.tasks.append(task)
+        try:
+            if Path(TaskRegisters.FILE_PATH).exists():
+                with open(TaskRegisters.FILE_PATH, "r", encoding="utf-8") as file:
+                    file_data = json.load(file)
+            else:
+                file_data = []
+
+            if not isinstance(file_data, list):
+                file_data = [file_data]
+
+            file_data.append(task)
+
+            with open(TaskRegisters.FILE_PATH, "w", encoding="utf-8") as file:
+                json.dump(file_data, file, indent=4, ensure_ascii=False)
+
+        except FileNotFoundError as e:
+            print(f"Erro to write in file {e}")
 
     def remove(self, task):
-        self.tasks.remove(task)
+        with open(TaskRegisters.FILE_PATH, "r", encoding="utf-8") as file:
+            file_data = json.load(file)
+
+        if not isinstance(file_data, list):
+            file_data = [file_data]
+
+        file_data.remove(task)
+
+        with open(TaskRegisters.FILE_PATH, "w", encoding="utf-8") as file:
+            json.dump(file_data, file, indent=4, ensure_ascii=False)
+
+
