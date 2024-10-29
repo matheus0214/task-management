@@ -4,3 +4,6 @@ class TaskRegisters:
 
     def add(self, task):
         self.tasks.append(task)
+
+    def remove(self, task):
+        self.tasks.remove(task)

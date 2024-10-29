@@ -18,7 +18,7 @@ frame.pack(fill="both", expand=True)
 
 input_label = InputTextWidget(frame).draw()
 task_register = TaskRegisters()
-tasks_list = TasksListWidget(frame)
+tasks_list = TasksListWidget(frame, task_register)
 
 button_action = ButtonAction(task_register, tasks_list)
 
