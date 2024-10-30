@@ -5,6 +5,10 @@ class TasksListWidget:
         self.root = root
         self.task_register = task_register
 
+        if len(task_register.tasks) > 0:
+            for item in task_register.tasks:
+                self.draw(item)
+
     def draw(self, task):
         frame = tk.Frame(self.root)
 

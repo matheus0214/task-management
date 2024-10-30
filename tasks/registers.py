@@ -6,7 +6,7 @@ class TaskRegisters:
     FILE_PATH = "./data/tasks.json"
 
     def __init__(self) -> None:
-        self.tasks = []
+        self.tasks = self.load_data()
 
     def add(self, task):
         try:
@@ -39,4 +39,17 @@ class TaskRegisters:
         with open(TaskRegisters.FILE_PATH, "w", encoding="utf-8") as file:
             json.dump(file_data, file, indent=4, ensure_ascii=False)
 
+    def load_data(self):
+        try:
+            if Path(TaskRegisters.FILE_PATH).exists():
+                with open(TaskRegisters.FILE_PATH) as file:
+                    data = json.load(file)
 
+                    if not isinstance(data, list):
+                        data = [data]
+            else:
+                data = []
+
+            return data
+        except:
+            return []
