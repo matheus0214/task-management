@@ -20,7 +20,7 @@ frame_register_new = tk.Frame(frame)
 frame_register_new.pack(fill="both")
 
 canvas = tk.Canvas(frame)
-canvas.pack(side=tk.LEFT, fill="both", expand=False)
+canvas.pack(side=tk.LEFT, fill="both", expand=True)
 
 scrollbar = tk.Scrollbar(frame, orient=tk.VERTICAL, command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
@@ -30,7 +30,7 @@ canvas.configure(yscrollcommand=scrollbar.set)
 frame_list = tk.Frame(canvas)
 frame_list.pack(fill="both")
 
-canvas.create_window((90, 0), window=frame_list, anchor="nw")
+canvas.create_window((0, 0), window=frame_list, anchor="nw")
 
 input_label = InputTextWidget(frame_register_new).draw()
 task_register = TaskRegisters()
