@@ -16,13 +16,13 @@ class TasksListWidget:
         label.pack(side="left", padx=12)
 
         button = tk.Button(frame, text="Finishe", command=lambda:
-                           self.remove_task(task, frame))
+                           self.finishe_task(task, frame))
         button.pack()
 
         frame.pack()
 
-    def remove_task(self, task, frame):
-        self.task_register.remove(task)
+    def finishe_task(self, task, frame):
+        self.task_register.finishe(task)
         frame.destroy()
 
 
