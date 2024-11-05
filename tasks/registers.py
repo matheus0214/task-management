@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import json
 
 
@@ -8,6 +9,8 @@ class TaskRegisters:
 
     def __init__(self) -> None:
         self.tasks = self.load_data()
+        
+        os.makedirs("./data", exist_ok=True)
 
     def add(self, task):
         try:
