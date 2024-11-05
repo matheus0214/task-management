@@ -4,3 +4,7 @@ venv
 data/*
 !data/
 !data/.gitkeep
+
+dist/
+build/*
+main.spec
