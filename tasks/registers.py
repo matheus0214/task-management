@@ -1,15 +1,12 @@
 from pathlib import Path
-import os
 import json
 
 class TaskRegisters:
-    FILE_PATH = "~/.local/share/task-management/data/tasks.json"
-    FILE_FINISHED_TASKS_PATH = "~/.local/share/task-management/data/finished.json"
+    FILE_PATH = "/usr/local/share/task-management/data/tasks.json"
+    FILE_FINISHED_TASKS_PATH = "/usr/local/share/task-management/data/finished.json"
 
     def __init__(self) -> None:
         self.tasks = self.load_data()
-        
-        os.makedirs("./data", exist_ok=True)
 
     def add(self, task):
         try:

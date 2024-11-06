@@ -1,6 +1,6 @@
 #!/bin/bash
 
-task_management_folder="/usr/local/share/task-management/"
+task_management_folder="/usr/local/share/task-management"
 username=$SUDO_USER
 desktop_file_icon="/home/$username/.local/share/applications"
 echo "$desktop_file_icon"
@@ -23,7 +23,8 @@ chmod +x dist
 
 echo "Verify if task management folder exists"
 if ! [ -d "$task_management_folder" ]; then
-  mkdir "$task_management_folder"
+  mkdir -p "$task_management_folder"
+  chown -R "$username":"$username" "$task_management_folder"
 fi
 
 
@@ -33,6 +34,26 @@ echo "Verify if icon folder exists"
 if ! [ -d "$task_management_folder/icon/" ]; then
   mkdir "$task_management_folder/icon/"
 fi
+
+echo "Verify if data folder exists"
+if ! [ -d "$task_management_folder/data/" ]; then
+  mkdir -p "$task_management_folder/data/"
+fi
+
+echo "Verify if data in progress files exists"
+if ! [ -d "$task_management_folder/data/tasks.json" ]; then
+  touch "$task_management_folder/data/tasks.json"
+  echo "[]" >  "$task_management_folder/data/tasks.json"
+fi
+
+echo "Verify if data finished files exists"
+if ! [ -d "$task_management_folder/data/finished.json" ]; then
+  touch "$task_management_folder/data/finished.json"
+  echo "[]" >  "$task_management_folder/data/finished.json"
+fi
+
+chown -R "$username":"$username" "$task_management_folder/data/"
+chmod -R 700 "$task_management_folder/data/"
 
 
 cp dist/task-management /usr/local/bin/task-management
