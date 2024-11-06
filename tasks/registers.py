@@ -2,10 +2,9 @@ from pathlib import Path
 import os
 import json
 
-
 class TaskRegisters:
-    FILE_PATH = "./data/tasks.json"
-    FILE_FINISHED_TASKS_PATH = "./data/finished.json"
+    FILE_PATH = "~/.local/share/task-management/data/tasks.json"
+    FILE_FINISHED_TASKS_PATH = "~/.local/share/task-management/data/finished.json"
 
     def __init__(self) -> None:
         self.tasks = self.load_data()
