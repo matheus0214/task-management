@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QMainWindow, QPushButton, QWidget
 
 from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
@@ -27,3 +28,5 @@ class MainWindow(QMainWindow):
         widget.setLayout(main_layout)
 
         self.setCentralWidget(widget)
+
+        main_layout.setAlignment(layout_input_actions, Qt.AlignmentFlag.AlignTop)
