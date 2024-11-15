@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QMainWindow, QPushButton, QWidget
+from PySide6.QtWidgets import QHBoxLayout, QMainWindow, QPushButton, QVBoxLayout, QWidget
 
 from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
 from ui.input_text_widget import InputTextWidget
@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         self.setMinimumWidth(WINDOW_MIN_WIDTH)
         self.setMinimumHeight(WINDOW_MIN_HEIGHT)
         
-        main_layout = QGridLayout()
+        main_layout = QVBoxLayout()
         layout_input_actions = QHBoxLayout()
         btn = QPushButton("Register")
 
@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         layout_input_actions.addWidget(input_text_widget)
         layout_input_actions.addWidget(btn)
 
-        main_layout.addLayout(layout_input_actions, 0, 0)
+        main_layout.addLayout(layout_input_actions)
 
         widget = QWidget()
         widget.setLayout(main_layout)
