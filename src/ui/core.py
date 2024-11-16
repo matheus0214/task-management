@@ -2,7 +2,9 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow, QPushButton, QVBoxLayout, QWidget
 
 from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
+from data.register import TaskRegisters
 from ui.input_text_widget import InputTextWidget
+from ui.task_widget import TaskWidget
 
 
 class MainWindow(QMainWindow):
@@ -41,9 +43,11 @@ class MainWindow(QMainWindow):
             layout_input_actions.sizeHint().height()
         )
 
-        list_task = ["Items", "itens 2"]
-        for iten in list_task:
-            layout_tasks.addWidget(QLabel(iten))
+        task_register = TaskRegisters()
+
+        for item in task_register.tasks:
+            label = TaskWidget(item)
+            layout_tasks.addWidget(label)
 
         main_layout.addWidget(layout_input_actions_widget)
         main_layout.addWidget(layout_tasks_widget) 
