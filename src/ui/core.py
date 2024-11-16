@@ -16,10 +16,11 @@ class MainWindow(QMainWindow):
         main_layout = QVBoxLayout()
         layout_input_actions = QHBoxLayout()
         btn = QPushButton("Register")
+        btn.pressed.connect(self.register_button_clicked)
 
-        input_text_widget = InputTextWidget()
+        self.input_text_widget = InputTextWidget()
 
-        layout_input_actions.addWidget(input_text_widget)
+        layout_input_actions.addWidget(self.input_text_widget)
         layout_input_actions.addWidget(btn)
 
         main_layout.addLayout(layout_input_actions)
@@ -30,3 +31,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
         main_layout.setAlignment(layout_input_actions, Qt.AlignmentFlag.AlignTop)
+
+    def register_button_clicked(self):
+        print("Click", self.input_text_widget.text())
+
