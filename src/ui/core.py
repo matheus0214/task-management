@@ -25,11 +25,11 @@ class MainWindow(QMainWindow):
             layout_input_actions_widget.sizePolicy().Policy.Minimum
         )
                 
-        layout_tasks = QVBoxLayout()
-        layout_tasks.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_tasks = QVBoxLayout()
+        self.layout_tasks.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         layout_tasks_widget = QWidget()
-        layout_tasks_widget.setLayout(layout_tasks)
+        layout_tasks_widget.setLayout(self.layout_tasks)
 
         btn = QPushButton("Register")
         btn.pressed.connect(self.register_button_clicked)
@@ -43,11 +43,9 @@ class MainWindow(QMainWindow):
             layout_input_actions.sizeHint().height()
         )
 
-        task_register = TaskRegisters()
+        self.task_register = TaskRegisters()
 
-        for item in task_register.tasks:
-            label = TaskWidget(item)
-            layout_tasks.addWidget(label)
+        self.show_task_list()
 
         main_layout.addWidget(layout_input_actions_widget)
         main_layout.addWidget(layout_tasks_widget) 
@@ -58,8 +56,23 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
         main_layout.setAlignment(layout_input_actions, Qt.AlignmentFlag.AlignTop)
-        main_layout.setAlignment(layout_tasks, Qt.AlignmentFlag.AlignTop)
+        main_layout.setAlignment(self.layout_tasks, Qt.AlignmentFlag.AlignTop)
 
     def register_button_clicked(self):
-        print("Click", self.input_text_widget.text())
+        task = self.input_text_widget.text()
+        self.task_register.add(task)
+
+        self.input_text_widget.clear()
+        self.draw_task(task)
+
+    def show_task_list(self):
+        for item in self.task_register.tasks:
+            self.draw_task(item)
+
+
+    def draw_task(self, task: str):
+        label = TaskWidget(task)
+        self.layout_tasks.addWidget(label)
+
+
 
