@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 
 from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
 from data.register import TaskRegisters
+from ui.input_task_widget import InputTaskWidget
 from ui.input_text_widget import InputTextWidget
 from ui.task_widget import TaskWidget
 
@@ -24,13 +25,6 @@ class MainWindow(QMainWindow):
 
         main_layout = QVBoxLayout()
         layout_input_actions = QHBoxLayout()
-        layout_input_actions_widget = QWidget()
-
-        layout_input_actions_widget.setLayout(layout_input_actions)
-        layout_input_actions_widget.setSizePolicy(
-            layout_input_actions_widget.sizePolicy().horizontalPolicy(),
-            layout_input_actions_widget.sizePolicy().Policy.Minimum,
-        )
 
         self.layout_tasks = QVBoxLayout()
         self.layout_tasks.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -50,16 +44,13 @@ class MainWindow(QMainWindow):
         layout_input_actions.addWidget(self.input_text_widget)
         layout_input_actions.addWidget(btn)
 
-        layout_input_actions_widget.setMaximumHeight(
-            layout_input_actions.sizeHint().height()
-        )
+        input_actions_widget = InputTaskWidget(layout_input_actions)
 
         self.task_register = TaskRegisters()
 
         self.show_task_list()
 
-
-        main_layout.addWidget(layout_input_actions_widget)
+        main_layout.addWidget(input_actions_widget)
         main_layout.addWidget(scroll_area)
 
         widget = QWidget()
