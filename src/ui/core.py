@@ -3,6 +3,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QMainWindow,
     QPushButton,
+    QScrollArea,
     QVBoxLayout,
     QWidget,
 )
@@ -37,6 +38,10 @@ class MainWindow(QMainWindow):
         layout_tasks_widget = QWidget()
         layout_tasks_widget.setLayout(self.layout_tasks)
 
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setWidget(layout_tasks_widget)
+
         btn = QPushButton("Register")
         btn.pressed.connect(self.register_button_clicked)
 
@@ -53,8 +58,9 @@ class MainWindow(QMainWindow):
 
         self.show_task_list()
 
+
         main_layout.addWidget(layout_input_actions_widget)
-        main_layout.addWidget(layout_tasks_widget)
+        main_layout.addWidget(scroll_area)
 
         widget = QWidget()
         widget.setLayout(main_layout)
