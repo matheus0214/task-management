@@ -1,5 +1,11 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QHBoxLayout, QMainWindow, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import (
+    QHBoxLayout,
+    QMainWindow,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
 from data.register import TaskRegisters
@@ -14,7 +20,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Task Management")
         self.setMinimumWidth(WINDOW_MIN_WIDTH)
         self.setMinimumHeight(WINDOW_MIN_HEIGHT)
-        
+
         main_layout = QVBoxLayout()
         layout_input_actions = QHBoxLayout()
         layout_input_actions_widget = QWidget()
@@ -22,9 +28,9 @@ class MainWindow(QMainWindow):
         layout_input_actions_widget.setLayout(layout_input_actions)
         layout_input_actions_widget.setSizePolicy(
             layout_input_actions_widget.sizePolicy().horizontalPolicy(),
-            layout_input_actions_widget.sizePolicy().Policy.Minimum
+            layout_input_actions_widget.sizePolicy().Policy.Minimum,
         )
-                
+
         self.layout_tasks = QVBoxLayout()
         self.layout_tasks.setAlignment(Qt.AlignmentFlag.AlignTop)
 
@@ -48,7 +54,7 @@ class MainWindow(QMainWindow):
         self.show_task_list()
 
         main_layout.addWidget(layout_input_actions_widget)
-        main_layout.addWidget(layout_tasks_widget) 
+        main_layout.addWidget(layout_tasks_widget)
 
         widget = QWidget()
         widget.setLayout(main_layout)
@@ -69,10 +75,10 @@ class MainWindow(QMainWindow):
         for item in self.task_register.tasks:
             self.draw_task(item)
 
-
     def draw_task(self, task: str):
-        label = TaskWidget(task)
+        label = TaskWidget(task, self.task_register, self.remove_task)
         self.layout_tasks.addWidget(label)
 
-
-
+    def remove_task(self, task: str):
+        index = self.task_register.tasks.index(task)
+        self.layout_tasks.takeAt(index).widget().deleteLater()
