@@ -1,3 +1,4 @@
+import os
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QHBoxLayout,
@@ -34,6 +35,9 @@ class MainWindow(QMainWindow):
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
+
+        with open(os.path.join(os.path.dirname(__file__), "css/scroll-area.qss")) as f:
+            scroll_area.setStyleSheet(f.read())
         scroll_area.setWidget(layout_tasks_widget)
 
         btn = QPushButton("Register")
