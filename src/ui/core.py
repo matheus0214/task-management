@@ -1,3 +1,7 @@
+"""
+This module is to handle with the main application window
+"""
+
 from os import path
 
 from PySide6.QtCore import Qt
@@ -18,6 +22,10 @@ from ui.task_widget import TaskWidget
 
 
 class MainWindow(QMainWindow):
+    """
+    Main app window
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -37,7 +45,9 @@ class MainWindow(QMainWindow):
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
 
-        with open(path.join(path.dirname(__file__), "css/scroll-area.qss")) as f:
+        with open(
+            path.join(path.dirname(__file__), "css/scroll-area.qss"), encoding="utf-8"
+        ) as f:
             scroll_area.setStyleSheet(f.read())
         scroll_area.setWidget(layout_tasks_widget)
 
@@ -67,6 +77,9 @@ class MainWindow(QMainWindow):
         main_layout.setAlignment(self.layout_tasks, Qt.AlignmentFlag.AlignTop)
 
     def register_button_clicked(self):
+        """
+        Handle the event when the button 'Register' is clicked
+        """
         task = self.input_text_widget.text()
         self.task_register.add(task)
 
@@ -74,13 +87,28 @@ class MainWindow(QMainWindow):
         self.draw_task(task)
 
     def show_task_list(self):
+        """
+        Draw all tasks in the screen
+        """
         for item in self.task_register.tasks:
             self.draw_task(item)
 
     def draw_task(self, task: str):
+        """
+        Draw a single task
+
+        Args:
+            task (str): the task to be added
+        """
         label = TaskWidget(task, self.task_register, self.remove_task)
         self.layout_tasks.addWidget(label)
 
     def remove_task(self, task: str):
+        """
+        Remove a task from the screen
+
+        Args:
+            task (str): the task to be removed
+        """
         index = self.task_register.tasks.index(task)
         self.layout_tasks.takeAt(index).widget().deleteLater()
