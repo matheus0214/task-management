@@ -1,3 +1,7 @@
+"""
+Main module to run the application
+"""
+
 from PySide6.QtWidgets import QApplication
 
 from ui.core import MainWindow
