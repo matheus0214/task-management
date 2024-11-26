@@ -1,22 +1,19 @@
-"""
-Module contains the task widget to show in the main screen
-"""
+"""Module contains the task widget to show in the main screen."""
 
 import os
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QPushButton, QWidget
 
-from data.register import TaskRegisters
+from task_management.data.register import TaskRegisters
 
 
 class TaskWidget(QWidget):
-    """
-    Task widget customized
-    """
+    """Task widget customized."""
 
     def __init__(
         self, task: str, task_register: TaskRegisters, remove_from_view
     ) -> None:
+        """Initialize a widget containing a task it self."""
         super().__init__()
 
         self.task_register = task_register
@@ -45,21 +42,21 @@ class TaskWidget(QWidget):
         self.setLayout(layout)
 
     def remove_task(self, task: str) -> None:
-        """
-        Method to remove task from view and from saved list
+        """Remove task from view and from saved list.
 
         Args:
             task (str): to be removed
+
         """
         self.task_register.remove(task)
         self.remove_from_view(task)
 
     def finishe_task(self, task: str) -> None:
-        """
-        Method to finishe the task and move there to all finished tasks
+        """Finishe the task and move there to all finished tasks.
 
         Args:
             task (str): should be finished
+
         """
         self.task_register.finishe(task)
         self.remove_from_view(task)

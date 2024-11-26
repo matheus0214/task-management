@@ -1,6 +1,4 @@
-"""
-This module is to handle with the main application window
-"""
+"""Module is to handle with the main application window."""
 
 from os import path
 
@@ -14,19 +12,17 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
-from data.register import TaskRegisters
-from ui.input_task_widget import InputTaskWidget
-from ui.input_text_widget import InputTextWidget
-from ui.task_widget import TaskWidget
-
+from task_management.constants.core import WINDOW_MIN_HEIGHT, WINDOW_MIN_WIDTH
+from task_management.ui.input_task_widget import InputTaskWidget
+from task_management.ui.input_text_widget import InputTextWidget
+from task_management.ui.task_widget import TaskWidget
+from task_management.data.register import TaskRegisters
 
 class MainWindow(QMainWindow):
-    """
-    Main app window
-    """
+    """Main app window."""
 
     def __init__(self):
+        """Initialize main window widgets."""
         super().__init__()
 
         self.setWindowTitle("Task Management")
@@ -77,9 +73,7 @@ class MainWindow(QMainWindow):
         main_layout.setAlignment(self.layout_tasks, Qt.AlignmentFlag.AlignTop)
 
     def register_button_clicked(self):
-        """
-        Handle the event when the button 'Register' is clicked
-        """
+        """Handle the event when the button 'Register' is clicked."""
         task = self.input_text_widget.text()
         self.task_register.add(task)
 
@@ -87,28 +81,26 @@ class MainWindow(QMainWindow):
         self.draw_task(task)
 
     def show_task_list(self):
-        """
-        Draw all tasks in the screen
-        """
+        """Draw all tasks in the screen."""
         for item in self.task_register.tasks:
             self.draw_task(item)
 
     def draw_task(self, task: str):
-        """
-        Draw a single task
+        """Draw a single task.
 
         Args:
             task (str): the task to be added
+
         """
         label = TaskWidget(task, self.task_register, self.remove_task)
         self.layout_tasks.addWidget(label)
 
     def remove_task(self, task: str):
-        """
-        Remove a task from the screen
+        """Remove a task from the screen.
 
         Args:
             task (str): the task to be removed
+
         """
         index = self.task_register.tasks.index(task)
         self.layout_tasks.takeAt(index).widget().deleteLater()
